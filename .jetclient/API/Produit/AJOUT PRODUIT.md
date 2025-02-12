@@ -9,10 +9,10 @@ id = 'b4be272d-6133-469a-87a8-01ae80e15707'
 type = 'JSON'
 raw = '''
 {
-  "nom": "hot dog !!!!!!",
-  "code": "hotdodog",
+  "nom": "eeee",
+  "code": "aaa",
   "description": "un super hotdog",
-  "prix": 2.9,
+  "prix": 5,
   "etat": {
     id: 2
   }

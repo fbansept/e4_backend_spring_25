@@ -2,6 +2,7 @@ package edu.fbansept.e4_backend_spring_25.controller;
 
 import edu.fbansept.e4_backend_spring_25.dao.EtiquetteDao;
 import edu.fbansept.e4_backend_spring_25.model.Etiquette;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -40,7 +41,7 @@ public class EtiquetteController {
     }
 
     @PostMapping("/etiquette")
-    public ResponseEntity<Etiquette> addEtiquette(@RequestBody Etiquette etiquette) {
+    public ResponseEntity<Etiquette> addEtiquette(@RequestBody @Valid Etiquette etiquette) {
 
         etiquette.setId(null);
 //
@@ -54,7 +55,7 @@ public class EtiquetteController {
     }
 
     @PutMapping("/etiquette/{id}")
-    public ResponseEntity<Etiquette> updateEtiquette(@RequestBody Etiquette etiquette, @PathVariable int id) {
+    public ResponseEntity<Etiquette> updateEtiquette(@RequestBody @Valid Etiquette etiquette, @PathVariable int id) {
 
         etiquette.setId(id);
 

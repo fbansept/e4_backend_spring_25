@@ -2,6 +2,7 @@ package edu.fbansept.e4_backend_spring_25.controller;
 
 import edu.fbansept.e4_backend_spring_25.dao.EtatDao;
 import edu.fbansept.e4_backend_spring_25.model.Etat;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -40,7 +41,7 @@ public class EtatController {
     }
 
     @PostMapping("/etat")
-    public ResponseEntity<Etat> addEtat(@RequestBody Etat etat) {
+    public ResponseEntity<Etat> addEtat(@RequestBody @Valid Etat etat) {
 
         etat.setId(null);
 //
@@ -54,7 +55,7 @@ public class EtatController {
     }
 
     @PutMapping("/etat/{id}")
-    public ResponseEntity<Etat> updateEtat(@RequestBody Etat etat, @PathVariable int id) {
+    public ResponseEntity<Etat> updateEtat(@RequestBody @Valid Etat etat, @PathVariable int id) {
 
         etat.setId(id);
 

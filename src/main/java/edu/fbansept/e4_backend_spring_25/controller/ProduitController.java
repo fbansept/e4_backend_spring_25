@@ -2,6 +2,7 @@ package edu.fbansept.e4_backend_spring_25.controller;
 
 import edu.fbansept.e4_backend_spring_25.dao.ProduitDao;
 import edu.fbansept.e4_backend_spring_25.model.Produit;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -40,7 +41,7 @@ public class ProduitController {
     }
 
     @PostMapping("/produit")
-    public ResponseEntity<Produit> addProduit(@RequestBody Produit produit) {
+    public ResponseEntity<Produit> addProduit(@RequestBody @Valid Produit produit) {
 
         produit.setId(null);
 //
@@ -54,7 +55,7 @@ public class ProduitController {
     }
 
     @PutMapping("/produit/{id}")
-    public ResponseEntity<Produit> updateProduit(@RequestBody Produit produit, @PathVariable int id) {
+    public ResponseEntity<Produit> updateProduit(@RequestBody @Valid Produit produit, @PathVariable int id) {
 
         produit.setId(id);
 
