@@ -20,6 +20,8 @@ public class Etiquette {
     @Pattern(regexp = "^\\s*\\S{3,}\\s*$", message = "la designation doit comporter 3 caractères (en excluant les espaces)")
     private String designation;
 
+    private String couleur;
+
 }
 
 

@@ -170,4 +170,9 @@ public class FakeProduitDao implements ProduitDao {
     public Page<Produit> findAll(Pageable pageable) {
         return null;
     }
+
+    @Override
+    public List<Produit> findAllByDipsonible(boolean dipsonible) {
+        return List.of();
+    }
 }

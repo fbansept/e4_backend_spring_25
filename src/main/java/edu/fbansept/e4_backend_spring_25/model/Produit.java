@@ -46,9 +46,11 @@ public class Produit {
     @ManyToMany
     @JoinTable(
             name = "etiquette_produit",
-            joinColumns = @JoinColumn(name = "produit_id"),
-            inverseJoinColumns = @JoinColumn(name = "etiquette_id")
+            joinColumns = @JoinColumn(name = "produit_id", foreignKey = @ForeignKey(name = "FK_etiquette_produit")),
+            inverseJoinColumns = @JoinColumn(name = "etiquette_id", foreignKey = @ForeignKey(name = "FK_produit_etiquette"))
     )
     private List<Etiquette> etiquettes;
+
+    private boolean disponible = true;
 }
 

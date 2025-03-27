@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin
 public class ProduitController {
 
     ProduitDao produitDao;
@@ -24,7 +25,7 @@ public class ProduitController {
     @GetMapping("/produits")
     public List<Produit> getProduits() {
 
-        return produitDao.findAll();
+        return produitDao.findAllByDisponible(true);
     }
 
     @GetMapping("/produit/{id}")
@@ -44,10 +45,8 @@ public class ProduitController {
     public ResponseEntity<Produit> addProduit(@RequestBody @Valid Produit produit) {
 
         produit.setId(null);
-//
-//        if(produit.getId() != null) {
-//            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-//        }
+
+        produit.setDisponible(true);
 
         produitDao.save(produit);
 
@@ -76,8 +75,28 @@ public class ProduitController {
         produitDao.deleteById(id);
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-
     }
 
+    @PatchMapping("/produit/rendre-indisponible/{id}")
+    public ResponseEntity<Produit> rendreProduitIndisponible(@PathVariable int id) {
+
+        Optional<Produit> optionalProduit = produitDao.findById(id);
+
+        if (optionalProduit.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        Produit produitBdd = optionalProduit.get();
+
+        if (!produitBdd.isDisponible()) {
+            return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
+        }
+
+        produitBdd.setDisponible(false);
+
+        produitDao.save(produitBdd);
+
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 
 }

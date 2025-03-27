@@ -3,15 +3,16 @@ VALUES ('statisfaisant'),
        ('neuf'),
        ('mauvais');
 
-INSERT INTO produit (prix, code, description, nom, etat_id)
-VALUES ('1499.99', 'bagueor', 'une bague en or', 'bague', 2),
-       ('500', 'boshperc', 'une perceuse bosh', 'perceuse', 3);
+INSERT INTO produit (prix, code, description, nom, etat_id, disponible)
+VALUES ('1499.99', 'bagueor', 'une bague en or', 'bague', 2, 1),
+       ('500', 'boshperc', 'une perceuse bosh', 'perceuse', 3, 1),
+       ('1', 'VS42', 'un produit sans etiquette', 'vis', 1, 1);
 
-INSERT INTO etiquette (designation)
-VALUES ('st valentin'),
-       ('homme'),
-       ('femme'),
-       ('promo');
+INSERT INTO etiquette (designation, couleur)
+VALUES ('st valentin', 'red'),
+       ('homme', 'blue'),
+       ('femme', 'pink'),
+       ('promo', 'green');
 
 
 INSERT INTO etiquette_produit (produit_id, etiquette_id)
@@ -34,3 +35,24 @@ INSERT INTO ligne_commande (quantite, prix_de_vente, produit_id, commande_id)
 VALUES (1, 1399.99, 1, 1),
        (1, 1499.99, 1, 2),
        (2, 500, 2, 2);
+
+
+alter table etiquette_produit
+    drop foreign key FK_produit_etiquette;
+
+alter table etiquette_produit
+    drop foreign key FK_etiquette_produit;
+
+DROP INDEX FK_produit_etiquette ON etiquette_produit;
+DROP INDEX FK_etiquette_produit ON etiquette_produit;
+
+alter table etiquette_produit
+    add constraint FK_produit_etiquette
+        foreign key (produit_id) references produit (id)
+            on update cascade on delete cascade;
+
+alter table etiquette_produit
+    add constraint FK_etiquette_produit
+        foreign key (etiquette_id) references etiquette (id)
+            on update cascade on delete cascade;
+
