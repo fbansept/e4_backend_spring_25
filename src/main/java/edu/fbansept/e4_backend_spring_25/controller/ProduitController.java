@@ -2,6 +2,8 @@ package edu.fbansept.e4_backend_spring_25.controller;
 
 import edu.fbansept.e4_backend_spring_25.dao.ProduitDao;
 import edu.fbansept.e4_backend_spring_25.model.Produit;
+import edu.fbansept.e4_backend_spring_25.security.IsAdmin;
+import edu.fbansept.e4_backend_spring_25.security.IsUser;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,13 +24,16 @@ public class ProduitController {
         this.produitDao = produitDao;
     }
 
+
     @GetMapping("/produits")
+    @IsUser
     public List<Produit> getProduits() {
 
         return produitDao.findAllByDisponible(true);
     }
 
     @GetMapping("/produit/{id}")
+    @IsUser
     public ResponseEntity<Produit> getProduit(@PathVariable int id) {
 
         Optional<Produit> optionalProduit = produitDao.findById(id);
@@ -42,6 +47,7 @@ public class ProduitController {
     }
 
     @PostMapping("/produit")
+    @IsAdmin
     public ResponseEntity<Produit> addProduit(@RequestBody @Valid Produit produit) {
 
         produit.setId(null);
@@ -54,6 +60,7 @@ public class ProduitController {
     }
 
     @PutMapping("/produit/{id}")
+    @IsAdmin
     public ResponseEntity<Produit> updateProduit(@RequestBody @Valid Produit produit, @PathVariable int id) {
 
         produit.setId(id);
@@ -64,6 +71,7 @@ public class ProduitController {
     }
 
     @DeleteMapping("/produit/{id}")
+    @IsAdmin
     public ResponseEntity<Produit> deleteProduit(@PathVariable int id) {
 
         Optional<Produit> optionalProduit = produitDao.findById(id);
@@ -78,6 +86,7 @@ public class ProduitController {
     }
 
     @PatchMapping("/produit/rendre-indisponible/{id}")
+    @IsAdmin
     public ResponseEntity<Produit> rendreProduitIndisponible(@PathVariable int id) {
 
         Optional<Produit> optionalProduit = produitDao.findById(id);

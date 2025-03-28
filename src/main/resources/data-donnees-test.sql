@@ -12,7 +12,7 @@ INSERT INTO etiquette (designation, couleur)
 VALUES ('st valentin', 'red'),
        ('homme', 'blue'),
        ('femme', 'pink'),
-       ('promo', 'green');
+       ('promo', '#e98f9d');
 
 
 INSERT INTO etiquette_produit (produit_id, etiquette_id)
@@ -23,9 +23,9 @@ VALUES (1, 3),
        (2, 4);
 
 INSERT INTO utilisateur (email, password, administrateur, actif)
-VALUES ("a@a", "root", 1, 1),
-       ("b@b", "root", 0, 1),
-       ("c@c", "root", 0, 0);
+VALUES ("a@a", "$2a$10$vplRMIHJw4/ZPhFqBBYfiOzIkM7dLmdU4EOvRSWWW23VaRiowCpcO", 1, 1),
+       ("b@b", "$2a$10$vplRMIHJw4/ZPhFqBBYfiOzIkM7dLmdU4EOvRSWWW23VaRiowCpcO", 0, 1),
+       ("c@c", "$2a$10$vplRMIHJw4/ZPhFqBBYfiOzIkM7dLmdU4EOvRSWWW23VaRiowCpcO", 0, 0);
 
 INSERT INTO commande (date, utilisateur_id, status)
 VALUES ("2025-02-12 13:10:04.000000", 2, 'ENVOYEE'),
